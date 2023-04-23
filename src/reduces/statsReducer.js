@@ -9,13 +9,11 @@ export const statsReducer = (stats = initialState, action) => {
     switch (action.type) {
         case CHANGE_STATS:
             const {isSubscribers, isInc} = action.payload;
-            const type = isSubscribers?"subscribe":"followers";
-            stats[type] = isInc?stats[type] + 1:stats[type] - 1;
-            if (stats[type] < 0) {
-                stats[type] = 0;
-            }
+            const type = isSubscribers ? "subscribe" : "followers";
+            stats[type] = isInc ? stats[type] + 1 : stats[type] - 1;
+            stats[type] = (stats[type] < 0) ? 0 : stats[type];
 
-            return  {
+            return {
                 ...stats,
                 type: stats[type]
             }
