@@ -11,6 +11,9 @@ export const statsReducer = (stats = initialState, action) => {
             const {isSubscribers, isInc} = action.payload;
             const type = isSubscribers?"subscribe":"followers";
             stats[type] = isInc?stats[type] + 1:stats[type] - 1;
+            if (stats[type] < 0) {
+                stats[type] = 0;
+            }
 
             return  {
                 ...stats,
